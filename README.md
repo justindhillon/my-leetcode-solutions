@@ -16,7 +16,7 @@ Welcome! This repo is a dedicated space where I share my solutions for various L
 
 This project is open-source and available under the Affero General Public License v3 (AGPLv3). Please see the [LICENSE](https://github.com/justindhillon/my-leetcode-solutions/blob/main/LICENSE) file for more details.
 
-## Connect with Me
+## Connect Me
 
 Feel free to reach out if you have any questions or just want to connect!
 
