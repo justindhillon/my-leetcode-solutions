@@ -1,17 +1,23 @@
-function groupAnagrams(strs: string[]): string[][] {
-    const map = new Map();
+function isValidSudoku(board: string[][]): boolean {
+    const set = new Set();
 
-    // To find out if two strings are an anagram,
-    // We can sort the strings alphabetically
-    // If they are the same sorted,
-    // Then they are anagrams
-    for (let str of strs) {
-        const sorted = str.split('').sort().join('');
-        if (!map.has(sorted)) {
-            map.set(sorted, []);
+    for (let i = 0; i < board.length; i++) {
+        for (let v = 0; v < board.length; v++) {
+            const cell = board[i][v];
+            if (cell === ".") continue;
+
+            const row = `row: ${i} value: ${cell}`
+            const column = `column: ${v} value: ${cell}`
+            const boxNum = Math.floor(i/3)*3 + Math.floor(v/3)
+            const box = `box: ${boxNum} value: ${cell}`
+
+            if (set.has(row) || set.has(column) || set.has(box)) {
+                return false;
+            } else {
+                set.add(row).add(column).add(box);
+            }
         }
-        map.get(sorted).push(str);
     }
 
-    return Array.from(map.values());
+    return true;
 };
