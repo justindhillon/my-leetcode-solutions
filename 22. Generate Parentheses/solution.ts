@@ -1,36 +1,18 @@
 function generateParenthesis(n: number): string[] {
-    // combination, # of open parentheses, # of closed parentheses
-    let stack: [string, number, number][] = [["", n, n]];
-    let answer = [];
+    let size = n*2;
+    let parenthesis: [string, number, number][] = [["", 0, 0]];
+    let answer: string[] = [];
 
-    while (stack.length) { // Run until stack is empty
-        const [combination, open, close] = stack.pop();
-        if (!open && !close) {
-            // Combination complete, add to answer
-            answer.push(combination);
-        } else {
-            // Combination incomplete, add all posibilities to stack
-            if (open === close) {
-                stack.push([
-                    combination + "(",
-                    open-1,
-                    close]);
-            } else if (!open) {
-                stack.push([
-                    combination + ")",
-                    open,
-                    close-1]);
-            } else {
-                stack.push([
-                    combination + "(",
-                    open-1,
-                    close]);
-                stack.push([
-                    combination + ")",
-                    open,
-                    close-1]);
-            }
+    while (parenthesis.length) {
+        const [string, left, right] = parenthesis.pop();
+        
+        if (string.length == size) {
+            answer.push(string);
+            continue;
         }
+        
+        if (left != right) parenthesis.push([string + ")", left, right+1]);
+        if (left != n) parenthesis.push([string + "(", left+1, right]);
     }
 
     return answer;
